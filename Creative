@@ -1,0 +1,26 @@
+import requests
+
+# Replace 'YOUR_ACCESS_TOKEN' with your GitHub access token
+access_token = 'YOUR_ACCESS_TOKEN'
+
+# Replace 'REPO_NAME' with the desired repository name
+repo_name = 'REPO_NAME'
+
+headers = {
+    'Authorization': f'Token {access_token}',
+    'Accept': 'application/vnd.github.v3+json'
+}
+
+data = {
+    'name': repo_name,
+    'auto_init': True
+}
+
+# Send a POST request to create a new repository
+response = requests.post('https://api.github.com/user/repos', headers=headers, json=data)
+
+if response.status_code == 201:
+    print(f"Repository '{repo_name}' successfully created!")
+else:
+    print("Failed to create repository.")
+    print(response.json())
